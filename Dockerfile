@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
 
-ARG CUDA=10.1
+ARG CUDA=10.2
 ARG LIBNVINFER=6.0.1-1
 ARG LIBNVINFER_MAJOR_VERSION=6
 
@@ -49,6 +49,7 @@ RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/lib
     && ldconfig
 
 
-RUN pip3 --no-cache-dir install --upgrade \
-    tensorflow==${TENSORFLOW} \
-    tensorflow==${TENSORBOARD}
+RUN python3.7 -m pip install --upgrade pip setuptools \
+    && python3.7 -m pip --no-cache-dir install --upgrade \
+        tensorflow==${TENSORFLOW} \
+        tensorboard==${TENSORFLOW}
